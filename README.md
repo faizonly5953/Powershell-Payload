@@ -32,5 +32,5 @@ Option to save the computer specification information to a file
 
 Ability to choose which information to retrieve and send
 
-## Suggesntion ##
+## Suggestion ##
 Suggestions and criticism for improvements are welcome. Please create a pull request or open an issue for discussion.
