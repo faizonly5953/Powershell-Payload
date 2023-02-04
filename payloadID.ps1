@@ -6,14 +6,14 @@ $operatingSystem = Get-WmiObject Win32_OperatingSystem
 $user = Get-WmiObject Win32_UserAccount | Where-Object {$_.Name -eq $env:username}
 
 $specifications = @{
-    "Nama Komputer" = $computerSystem.Name;
-    "Model" = $computerSystem.Model;
-    "Processor" = "$($processor.Name) ($($processor.NumberOfCores) cores)";
-    "RAM" = "$(( $computerSystem.TotalPhysicalMemory / 1GB )) GB";
-    "Sistem Operasi" = $operatingSystem.Caption;
-    "Kartu Grafis" = $graphicsAdapter.Name;
-    "Penyimpanan" = foreach ($drive in $storage) { "$($drive.DeviceID) ($($drive.Size / 1GB) GB, $($drive.FreeSpace / 1GB) GB tersedia)" };
-    "Nama Akun User Windows" = $user.Name;
+    "Nama Komputer" = $computerSystem.Name
+    "Model" = $computerSystem.Model
+    "Processor" = "$($processor.Name) ($($processor.NumberOfCores) cores)"
+    "RAM" = "$(( $computerSystem.TotalPhysicalMemory / 1GB )) GB"
+    "Sistem Operasi" = $operatingSystem.Caption
+    "Kartu Grafis" = $graphicsAdapter.Name
+    "Penyimpanan" = foreach ($drive in $storage) { "$($drive.DeviceID) ($($drive.Size / 1GB) GB, $($drive.FreeSpace / 1GB) GB tersedia)" }
+    "Nama Akun User Windows" = $user.Name
 }
 
 $body = "Spesifikasi Komputer:`n"
