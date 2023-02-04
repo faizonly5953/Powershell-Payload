@@ -22,4 +22,10 @@ foreach ($spec in $specifications.GetEnumerator()) {
     $body += "$($spec.Key): $($spec.Value)`n"
 }
 
-Send-MailMessage -From "babufiondel@gmail.com" -To "faizbagusp@gmail.com" -Subject "Spesifikasi Komputer" -Body $body -SmtpServer "smtp.gmail.com" -Port "587" -UseSsl -Credential (New-Object System.Management.Automation.PSCredential("babufiondel@gmail.com",(ConvertTo-SecureString "zqkvexkrcnnjpzxi" -AsPlainText -Force)))
+$from = Read-Host -Prompt "Email Pengirim ?"
+$password = Read-Host -Prompt "Password ?" -AsSecureString
+$to = Read-Host -Prompt "Email Penerima ?"
+
+$cred = New-Object System.Management.Automation.PSCredential($from, $password)
+
+Send-MailMessage -From $from -To $to -Subject "Spesifikasi Komputer" -Body $body -SmtpServer "smtp.gmail.com" -Port "587" -UseSsl -Credential $cred
