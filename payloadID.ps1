@@ -6,7 +6,7 @@ $operatingSystem = Get-WmiObject Win32_OperatingSystem
 $user = Get-WmiObject Win32_UserAccount | Where-Object {$_.Name -eq $env:username}
 
 $specifications = @{
-    "Nama Komputer" = $computerSystem.Name
+    "Nama Komputer" = $computerSystem.Name;
     "Model" = $computerSystem.Model
     "Processor" = "$($processor.Name) ($($processor.NumberOfCores) cores)"
     "RAM" = "$(( $computerSystem.TotalPhysicalMemory / 1GB )) GB"
