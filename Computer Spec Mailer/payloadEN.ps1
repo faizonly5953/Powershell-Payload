@@ -5,6 +5,7 @@ $storage = Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} |
 $operatingSystem = Get-WmiObject Win32_OperatingSystem
 $user = Get-WmiObject Win32_UserAccount | Where-Object {$_.Name -eq $env:username}
 $ip = (Test-Connection -ComputerName $env:COMPUTERNAME -Count 1).IPV4Address.IPAddressToString
+$bios = Get-WmiObject Win32_BIOS
 
 $specifications = @{
     "Computer Name" = $computerSystem.Name;
@@ -16,6 +17,7 @@ $specifications = @{
     "Storage" = foreach ($drive in $storage) { "$($drive.DeviceID) ($($drive.Size / 1GB) GB, $($drive.FreeSpace / 1GB) GB Available)" };
     "Username Windows" = $user.Name;
     "Ip Address" = $ip;
+    "Bios Version" = $($bios.SMBIOSBIOSVersion);
 }
 
 $body = "Computer Spec:`n"
