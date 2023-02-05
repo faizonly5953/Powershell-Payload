@@ -4,6 +4,7 @@ $graphicsAdapter = Get-WmiObject Win32_VideoController
 $storage = Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} | Select-Object DeviceID, Size, FreeSpace
 $operatingSystem = Get-WmiObject Win32_OperatingSystem
 $user = Get-WmiObject Win32_UserAccount | Where-Object {$_.Name -eq $env:username}
+$ip = (Test-Connection -ComputerName $env:COMPUTERNAME -Count 1).IPV4Address.IPAddressToString
 
 $specifications = @{
     "Computer Name" = $computerSystem.Name;
@@ -14,6 +15,7 @@ $specifications = @{
     "Graphics Card" = $graphicsAdapter.Name;
     "Storage" = foreach ($drive in $storage) { "$($drive.DeviceID) ($($drive.Size / 1GB) GB, $($drive.FreeSpace / 1GB) GB Available)" };
     "Username Windows" = $user.Name;
+    "Ip Address" = $ip;
 }
 
 $body = "Computer Spec:`n"
